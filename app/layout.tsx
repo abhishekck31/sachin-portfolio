@@ -2,7 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Outfit } from "next/font/google"
 // Example for app/layout.js or pages/_app.js
-import '../styles/globals.css';
+import 'globals.css';
 import Navigation from "./components/Navigation"
 import Footer from "./components/Footer"
 
