@@ -8,22 +8,23 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 const projects = [
   {
     id: 1,
-    title: "Brand Revolution",
-    client: "TechCorp",
-    category: "Commercial",
-    image: "/placeholder.svg?height=720&width=1280&text=Brand+Revolution&bg=1e40af&color=white",
+    title: "How to Beat PROCRASTINATION",
+    client: "Physics Wallah",
+    category: "Education",
+    image: "/procrastination.jpg?height=720&width=1280&text=Brand+Revolution&bg=1e40af&color=white",
     videoUrl: "/placeholder.svg?height=720&width=1280",
     description:
       "A groundbreaking commercial campaign that redefined TechCorp's brand identity through innovative visual storytelling.",
     duration: "2:30",
     year: "2024",
     color: "from-blue-500 to-purple-600",
+  youtubeUrl: "https://www.youtube.com/embed/xiAGZw8wREM"
   },
   {
     id: 2,
-    title: "Midnight Dreams",
-    client: "Luna Records",
-    category: "Music Video",
+    title: "Shortfrom vs Longform",
+    client: "Aksher Creatives",
+    category: "Education",
     image: "/placeholder.svg?height=720&width=1280&text=Midnight+Dreams&bg=7c3aed&color=white",
     videoUrl: "/placeholder.svg?height=720&width=1280",
     description:
@@ -31,6 +32,7 @@ const projects = [
     duration: "3:45",
     year: "2024",
     color: "from-purple-500 to-pink-600",
+  youtubeUrl: "https://www.youtube.com/embed/LZfKX1ypjGI"
   },
   {
     id: 3,
@@ -44,6 +46,7 @@ const projects = [
     duration: "45:00",
     year: "2023",
     color: "from-teal-500 to-blue-600",
+    youtubeUrl: "https://www.youtube.com/embed/1oiNysEAyIk&ab_channel=Dr.RakshitaSingh-Unacademy"
   },
   {
     id: 4,
@@ -57,6 +60,7 @@ const projects = [
     duration: "5:20",
     year: "2023",
     color: "from-orange-500 to-red-600",
+    youtubeUrl: "https://www.youtube.com/embed/Ua1rvobHC4g&t=136s&ab_channel=UnacademyNEETToppers"
   },
 ]
 
@@ -171,38 +175,26 @@ export default function WorkSection() {
                 transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                 className="absolute inset-0"
               >
-                <Image
-                  src={currentProject.image || "/placeholder.svg"}
-                  alt={currentProject.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
+                {currentProject.youtubeUrl ? (
+                  <iframe
+                    src={currentProject.youtubeUrl}
+                    title={currentProject.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full absolute inset-0"
+                    style={{ border: 0 }}
+                  />
+                ) : (
+                  <Image
+                    src={currentProject.image || "/placeholder.svg"}
+                    alt={currentProject.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                )}
 
-                {/* Minimal Video Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-
-                {/* Smooth Play/Pause Button */}
-                <div className="absolute inset-0 flex items-center justify-center group">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={togglePlayPause}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="w-20 h-20 bg-white/95 backdrop-blur-xl rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-all duration-300 ease-out"
-                  >
-                    <motion.div
-                      animate={{ scale: isPlaying ? [1, 1.05, 1] : 1 }}
-                      transition={{ duration: 0.4, repeat: isPlaying ? Number.POSITIVE_INFINITY : 0, ease: "easeOut" }}
-                    >
-                      {isPlaying ? (
-                        <Pause className="w-8 h-8 text-gray-900" />
-                      ) : (
-                        <Play className="w-8 h-8 text-gray-900 ml-1" />
-                      )}
-                    </motion.div>
-                  </motion.button>
-                </div>
+                {/* Removed overlays and play/pause button for always-visible video */}
               </motion.div>
             </AnimatePresence>
           </div>
