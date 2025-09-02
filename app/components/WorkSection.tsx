@@ -11,62 +11,62 @@ const projects = [
     title: "How to Beat PROCRASTINATION",
     client: "Physics Wallah",
     category: "Education",
-    image: "/procrastination.jpg?height=720&width=1280&text=Brand+Revolution&bg=1e40af&color=white",
-    videoUrl: "/placeholder.svg?height=720&width=1280",
-    description:
-      "A groundbreaking commercial campaign that redefined TechCorp's brand identity through innovative visual storytelling.",
-    duration: "2:30",
-    year: "2024",
-    color: "from-blue-500 to-purple-600",
-  youtubeUrl: "https://www.youtube.com/embed/xiAGZw8wREM"
+     image: "https://img.youtube.com/vi/xiAGZw8wREM/hqdefault.jpg",
+     videoUrl: "https://www.youtube.com/embed/xiAGZw8wREM",
+     description:
+       "A groundbreaking commercial campaign that redefined TechCorp's brand identity through innovative visual storytelling.",
+     duration: "2:30",
+     year: "2024",
+     color: "from-blue-500 to-purple-600",
+     youtubeUrl: "https://www.youtube.com/embed/xiAGZw8wREM"
   },
   {
     id: 2,
     title: "Shortfrom vs Longform",
     client: "Aksher Creatives",
     category: "Education",
-    image: "/placeholder.svg?height=720&width=1280&text=Midnight+Dreams&bg=7c3aed&color=white",
-    videoUrl: "/placeholder.svg?height=720&width=1280",
-    description:
-      "An ethereal music video featuring seamless transitions and atmospheric visuals that perfectly complement the electronic soundscape.",
-    duration: "3:45",
-    year: "2024",
-    color: "from-purple-500 to-pink-600",
-  youtubeUrl: "https://www.youtube.com/embed/LZfKX1ypjGI"
+     image: "https://img.youtube.com/vi/LZfKX1ypjGI/hqdefault.jpg",
+     videoUrl: "https://www.youtube.com/embed/LZfKX1ypjGI",
+     description:
+       "An ethereal music video featuring seamless transitions and atmospheric visuals that perfectly complement the electronic soundscape.",
+     duration: "3:45",
+     year: "2024",
+     color: "from-purple-500 to-pink-600",
+     youtubeUrl: "https://www.youtube.com/embed/LZfKX1ypjGI"
   },
   {
     id: 3,
     title: "Ocean Conservation",
     client: "Blue Planet",
     category: "Documentary",
-    image: "/placeholder.svg?height=720&width=1280&text=Ocean+Conservation&bg=0891b2&color=white",
-    videoUrl: "/placeholder.svg?height=720&width=1280",
+    image: "https://img.youtube.com/vi/1oiNysEAyIk/hqdefault.jpg",
+    videoUrl: "https://www.youtube.com/embed/1oiNysEAyIk",
     description:
       "A compelling documentary showcasing marine conservation efforts through powerful storytelling and breathtaking underwater cinematography.",
     duration: "45:00",
     year: "2023",
     color: "from-teal-500 to-blue-600",
-    youtubeUrl: "https://www.youtube.com/embed/1oiNysEAyIk&ab_channel=Dr.RakshitaSingh-Unacademy"
+    youtubeUrl: "https://www.youtube.com/embed/1oiNysEAyIk"
   },
   {
     id: 4,
     title: "Startup Journey",
     client: "InnovateLab",
     category: "Corporate",
-    image: "/placeholder.svg?height=720&width=1280&text=Startup+Journey&bg=ea580c&color=white",
-    videoUrl: "/placeholder.svg?height=720&width=1280",
+    image: "https://img.youtube.com/vi/Ua1rvobHC4g/hqdefault.jpg",
+    videoUrl: "https://www.youtube.com/embed/Ua1rvobHC4g",
     description:
       "An inspiring corporate story highlighting innovation and growth through dynamic editing and professional motion graphics.",
     duration: "5:20",
     year: "2023",
     color: "from-orange-500 to-red-600",
-    youtubeUrl: "https://www.youtube.com/embed/Ua1rvobHC4g&t=136s&ab_channel=UnacademyNEETToppers"
+    youtubeUrl: "https://www.youtube.com/embed/Ua1rvobHC4g"
   },
 ]
 
 export default function WorkSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
   const ref = useRef(null)
@@ -162,10 +162,10 @@ export default function WorkSection() {
         {/* Main Video Player with Proper Sizing */}
         <motion.div
           style={{ borderRadius }}
-          className="relative mb-16 overflow-hidden bg-black shadow-2xl w-full max-w-6xl mx-auto"
+          className="relative mb-8 overflow-hidden bg-black shadow-2xl w-full max-w-xl md:max-w-3xl lg:max-w-5xl mx-auto"
         >
-          {/* Proper 16:9 Aspect Ratio Container */}
-          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+          {/* Responsive 16:9 Aspect Ratio Container */}
+          <div className="relative w-full h-64 sm:h-80 md:h-[28rem] lg:h-[32rem]" style={{ aspectRatio: '16/9' }}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -175,9 +175,9 @@ export default function WorkSection() {
                 transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                 className="absolute inset-0"
               >
-                {currentProject.youtubeUrl ? (
+                {currentProject.youtubeUrl && isPlaying ? (
                   <iframe
-                    src={currentProject.youtubeUrl}
+                    src={currentProject.youtubeUrl + '?autoplay=1'}
                     title={currentProject.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -185,13 +185,31 @@ export default function WorkSection() {
                     style={{ border: 0 }}
                   />
                 ) : (
-                  <Image
-                    src={currentProject.image || "/placeholder.svg"}
-                    alt={currentProject.title}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+                  <>
+                    <Image
+                      src={currentProject.image || "/placeholder.svg"}
+                      alt={currentProject.title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                    {currentProject.youtubeUrl && (
+                      <button
+                        onClick={() => {
+                          setIsPlaying(true);
+                          setIsAutoPlaying(false);
+                        }}
+                        className="absolute inset-0 flex items-center justify-center transition"
+                        style={{ zIndex: 2 }}
+                        aria-label="Play video"
+                      >
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="40" cy="40" r="40" fill="white" fillOpacity="0.85" />
+                          <polygon points="32,26 32,54 56,40" fill="#FF0000" />
+                        </svg>
+                      </button>
+                    )}
+                  </>
                 )}
 
                 {/* Removed overlays and play/pause button for always-visible video */}
@@ -288,7 +306,6 @@ export default function WorkSection() {
                   transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                   className="w-4 h-4 border-2 border-gray-300 border-t-gray-700 rounded-full"
                 />
-                <span>Auto-playing showcase</span>
               </div>
             </motion.div>
           )}

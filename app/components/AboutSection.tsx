@@ -29,7 +29,7 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About Alex</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About Sachin</h2>
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
               <p>
                 I'm a passionate video editor with over 8 years of experience creating compelling visual stories for
